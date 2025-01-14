@@ -21,6 +21,13 @@ const AUTH_CONFIG = {
 @Injectable()
 export class AuthService {
 
+    // by using 'redirectUri' the password will never be store in the
+    // memory website => Auth0 take care about it: we don´t receive 
+    // the password, we don´t have a private secret key installed 
+    // in our servers.
+    //
+    // Whenever the authetication is successfull we should be redirected
+    // to the resdirectUri (https://localhost:4200/lessons)
     auth0 = new auth0.WebAuth({
         clientID: AUTH_CONFIG.clientID,
         domain: AUTH_CONFIG.domain,
@@ -37,6 +44,8 @@ export class AuthService {
     }
 
     login() {
+
+        this.auth0.authorize();
 
     }
 
