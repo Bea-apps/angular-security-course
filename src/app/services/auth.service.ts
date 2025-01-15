@@ -61,17 +61,17 @@ export class AuthService {
             if(err) {
                 console.log("Could not parse the hash", err);
                 return;
+            } else if(authResult && authResult.idToken) {
+                window.location.hash = '';
+                console.log("Authentication successful, authResult", authResult);
+
+                // example to get more user info from auth0 url.
+                // this.auth0.client.userInfo(authResult.accessToken, (err, userProfile) => {
+                // });
+
+                this.setSession(authResult);
+
             }
-
-            console.log("Authentication successful, authResult", authResult);
-
-            // example to get more user info from auth0 url.
-            // this.auth0.client.userInfo(authResult.accessToken, (err, userProfile) => {
-            // });
-
-            
-
-
 
         }); 
 
@@ -87,6 +87,12 @@ export class AuthService {
 
     isLoggedOut() {
         return !this.isLoggedIn();
+    }
+
+    private setSession(authResult) {
+
+        localStorage.setItem('id_token', authResult.idToken);
+        
     }
 
 }
