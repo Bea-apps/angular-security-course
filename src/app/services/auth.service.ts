@@ -53,6 +53,30 @@ export class AuthService {
 
     }
 
+    retrieveAuthInfoFromUrl() {
+        // parseHash returns the result of the authentication operation
+        // or in case an error occurs, the error.
+        this.auth0.parseHash((err, authResult) => {
+
+            if(err) {
+                console.log("Could not parse the hash", err);
+                return;
+            }
+
+            console.log("Authentication successful, authResult", authResult);
+
+            // example to get more user info from auth0 url.
+            // this.auth0.client.userInfo(authResult.accessToken, (err, userProfile) => {
+            // });
+
+            
+
+
+
+        }); 
+
+    }
+
     logout() {
 
     }
