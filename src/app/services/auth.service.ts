@@ -6,6 +6,7 @@ import {Observable, BehaviorSubject} from "rxjs";
 import {User} from "../model/user";
 import * as auth0 from 'auth0-js';
 import {Router} from "@angular/router";
+import * as moment from 'moment';
 
 export const ANONYMOUS_USER: User = {
     id: undefined,
@@ -35,9 +36,12 @@ export class AuthService {
         redirectUri: 'https://localhost:4200/lessons'
     });
 
+    /*
     private userSubject = new BehaviorSubject<User>(undefined);
 
     user$: Observable<User> = this.userSubject.asObservable().pipe(filter(user => !!user));
+    */
+
 
     constructor(private http: HttpClient, private router: Router) {
 
@@ -78,21 +82,31 @@ export class AuthService {
     }
 
     logout() {
-
+        localStorage.removeItem('id_token');
+        localStorage.removeItem('expires_at');
+        this.router.navigate(['/lessons']);
     }
 
     public isLoggedIn() {
-        return false;
+        return moment().isBefore(this.getExpiration());
     }
 
     isLoggedOut() {
         return !this.isLoggedIn();
     }
 
+    getExpiration() {
+        const expiration = localStorage.getItem('expires_at');
+        const expiresAt = JSON.parse(expiration);
+        return moment(expiresAt);
+    }
+
     private setSession(authResult) {
 
+        const expiresAt = moment().add(authResult.expiresIn, 'second');
+
         localStorage.setItem('id_token', authResult.idToken);
-        
+        localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
     }
 
 }

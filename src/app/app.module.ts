@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { LessonsComponent } from './lessons/lessons.component';
@@ -10,18 +10,12 @@ import {LessonsService} from "./services/lessons.service";
 import {ReactiveFormsModule} from "@angular/forms";
 
 import {AuthService} from "./services/auth.service";
+import { AuthInterceptor } from './services/auth.interceptor';
 
-
-
-
-
-
-
-
-
-
-
-
+// multi means there can be multiple values for the provider. So there could be
+// multiple http interceptors. Organize together in a chain.
+// In the provide property we said to which injection token we want associate
+// our class with.
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +29,12 @@ import {AuthService} from "./services/auth.service";
   ],
   providers: [
       LessonsService,
-      AuthService
+      AuthService,
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: AuthInterceptor,
+        multi: true
+      }
   ],
   bootstrap: [AppComponent]
 })
