@@ -33,7 +33,8 @@ export class AuthService {
         clientID: AUTH_CONFIG.clientID,
         domain: AUTH_CONFIG.domain,
         responseType: 'token id_token',
-        redirectUri: 'https://localhost:4200/lessons'
+        redirectUri: 'https://localhost:4200/lessons',
+        scope: 'openid email ' // to ask the user permission for have access to his email
     });
 
     /*
@@ -49,12 +50,12 @@ export class AuthService {
 
     login() {
 
-        this.auth0.authorize();
+        this.auth0.authorize({initialScreen: 'login'});
 
     }
 
     signUp() {
-
+        this.auth0.authorize({initialScreen: 'signUp'});
     }
 
     retrieveAuthInfoFromUrl() {
