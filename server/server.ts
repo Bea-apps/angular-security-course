@@ -5,6 +5,7 @@ import {Application} from "express";
 import * as fs from 'fs';
 import * as https from 'https';
 import {readAllLessons} from "./read-all-lessons.route";
+import { userInfo } from 'os';
 
 
 const bodyParser = require('body-parser');
@@ -28,6 +29,7 @@ const options = commandLineArgs(optionDefinitions);
 
 
 // jwksRsa for retrieving the public key from auth0 website.
+// extract the payload with the user email and attach it to the request.
 const checkIfAuthenticated = jwt({
     secret: jwksRsa.expressJwtSecret({
         cache: true,
@@ -57,6 +59,8 @@ app.use((err, req, res, next) => {
 app.route('/api/lessons')
     .get(readAllLessons);
 
+app.route('/api/userinfo')
+    .put(userInfo);
 
 if (options.secure) {
 
