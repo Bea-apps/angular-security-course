@@ -1,6 +1,6 @@
-## Lessons content
+# Lessons content
 
-# 8.61: Implements the final part of the JWT based user signup solution.
+## 8.61: Implements the final part of the JWT based user signup solution.
 
 Implements the backend for the user info backend service.
 It´s going to be used in the frontend whenever the user logs in,
@@ -8,7 +8,7 @@ a new user is created or the application is started and the user is already logg
 At the moment we call to the backend to fetch the user preferences.
 In case of user signup, the service "user-info.route.ts" is going to write the user email into the database.
 
-# 8.62: Section summary.
+## 8.62: Section summary.
 
 Third party services advantages:
 
