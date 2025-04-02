@@ -1,0 +1,1 @@
+Actually the package-json dependencies are needed in order that the project works properly. That´s why There is a copy.
