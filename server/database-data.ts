@@ -1,5 +1,7 @@
 import {DbUser} from "./db-user";
 
+// This data that associates a user to a given list of roles only needs to exist 
+// in the server that is creating the new Json web tokens.
 export const USERS: { [key: number]: DbUser } = {
     1: {
         id: 1,
