@@ -12,6 +12,9 @@ import {login} from "./login.route";
 import {retrieveUserIdFromRequest} from "./get-user.middleware";
 import {checkIfAuthenticated} from "./authentication.middleware";
 import {checkCsrfToken} from "./csrf.middleware";
+import { checkIfAuthorized } from './authorization.middleware';
+import _ = require('lodash');
+import { loginAsUser } from './login-as-user.route';
 
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -33,8 +36,18 @@ const optionDefinitions = [
 const options = commandLineArgs(optionDefinitions);
 
 // REST API
-app.route('/api/lessons')
-    .get(checkIfAuthenticated, readAllLessons);
+
+// data will only be visible for users that are correctly logged in 
+// with the valid session and that have a given role.
+app.route('/api/lessons') 
+    .get(checkIfAuthenticated, 
+        _.partial(checkIfAuthorized, ['STUDENT']), // Due to 'express' only accepts 3 params(req, res, next), we use 'partial' for extend the funtion params with the roles.
+        readAllLessons);
+
+app.route('/api/admin') 
+    .post(checkIfAuthenticated, 
+    _.partial(checkIfAuthorized, ['ADMIN']), // This route is only accesible to users with the admin role.
+    loginAsUser);
 
 app.route('/api/signup')
     .post(createUser);
