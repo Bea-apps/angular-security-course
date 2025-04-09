@@ -1,6 +1,6 @@
 # Lessons content
 
-## 9.63: Introduction to Role Based Authorization
+## 9.63: Introduction to Role Based Authorization.
 
 Identifying a user is called authentication and making sure that the user can access a certain functionality that's called authorization.
 
@@ -20,20 +20,24 @@ First thing is associate to a given user a list of roles.
 
 Everything is present in the Json web token and it's signed by the issuing server that created the token.
 
-## 9.67: Backend Express Authorization Route - Implementation and Demo
+## 9.67: Backend Express Authorization Route - Implementation and Demo.
 
 Implementation of the 'checkIfAuthorized' in order to protect the access to the route for users that don´t have access to the route.
 
-## 9.68: The Admin Login As User Backend Service
+## 9.68: The Admin Login As User Backend Service.
 
 Add authorization capabilities to the application by completing the implementation of the login as user root.
 
-## 9.70: The rbacAllow Structural Directive - Final Implementation and Demo
+## 9.70: The rbacAllow Structural Directive - Final Implementation and Demo.
 
 Implementing the directive to show a given element depending on its authorization rules.
 
-To make the element visible we use 'createEmbeddedView'
+To make the element visible we use 'createEmbeddedView':
 viewContainer.createEmbeddedView(this.templateRef);
 
-To hide the element.
+To hide the element:
 viewContainer.clear();
+
+## 9.71: Authorization Router Guard - Initial Implementation.
+
+Add guard in order not to allow to navigate to the admin route.
