@@ -23,3 +23,7 @@ Everything is present in the Json web token and it's signed by the issuing serve
 ## 9.67: Backend Express Authorization Route - Implementation and Demo
 
 Implementation of the 'checkIfAuthorized' in order to protect the access to the route for users that don´t have access to the route.
+
+## 9.68: The Admin Login As User Backend Service
+
+Add authorization capabilities to the application by completing the implementation of the login as user root.
