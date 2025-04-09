@@ -19,7 +19,9 @@ export const routesConfig: Routes = [
     },
     {
         path: 'admin',
-        component: AdminComponent
+        component: AdminComponent,
+        canActivate: ["adminsOnlyGuard"] // provide a string instead of AuthorizationGuard 
+                                         // cause angular injection doesn´t allow the additional parameter 'allowedRoles'.
     },
     {
         path: '',
