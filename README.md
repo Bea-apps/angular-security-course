@@ -28,4 +28,12 @@ Implementation of the 'checkIfAuthorized' in order to protect the access to the 
 
 Add authorization capabilities to the application by completing the implementation of the login as user root.
 
+## 9.70: The rbacAllow Structural Directive - Final Implementation and Demo
 
+Implementing the directive to show a given element depending on its authorization rules.
+
+To make the element visible we use 'createEmbeddedView'
+viewContainer.createEmbeddedView(this.templateRef);
+
+To hide the element.
+viewContainer.clear();
