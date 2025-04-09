@@ -41,7 +41,7 @@ const options = commandLineArgs(optionDefinitions);
 // with the valid session and that have a given role.
 app.route('/api/lessons') 
     .get(checkIfAuthenticated, 
-        _.partial(checkIfAuthorized, ['STUDENT']), // Due to 'express' only accepts 3 params(req, res, next), we use 'partial' for extend the funtion params with the roles.
+        _.partial(checkIfAuthorized, ['STUDENT']), // Due to checkIfAuthorized using 'express' only accepts 3 params(req, res, next), we use 'partial' for extend the function params with the roles.
         readAllLessons);
 
 app.route('/api/admin') 
